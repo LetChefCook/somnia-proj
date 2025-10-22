@@ -1,6 +1,6 @@
-# InSomnia - AI Bedtime Stories dApp
+# Somnia - AI Bedtime Stories dApp
 
-A beautiful dApp that generates personalized bedtime stories using AI and Web3 technology powered by Somnia
+A beautiful dark-themed one-page dApp that generates personalized bedtime stories using AI and Web3 technology.
 
 ## Features
 
@@ -17,9 +17,8 @@ A beautiful dApp that generates personalized bedtime stories using AI and Web3 t
 - **Tailwind CSS** - Styling
 - **RainbowKit** - Wallet connection
 - **Wagmi** - Ethereum interaction
-- **Gemini API** - AI story generation
+- **OpenAI API** - AI story generation
 - **Yarn** - Package manager
-- **Remix IDE** - Smart contract creation
 
 ## Setup Instructions
 
@@ -27,27 +26,24 @@ A beautiful dApp that generates personalized bedtime stories using AI and Web3 t
    ```bash
    yarn install
    ```
-2. **Deploying Smart Contract:**
-   Copy the codes in contract/Insomnia.sol to [remix IDE](https://remix.ethereum.org) to deploy contract under Somnia Testnet and get the contract address.
 
-3. **Set up environment variables:**
+2. **Set up environment variables:**
    Create a `.env.local` file in the root directory with:
    ```env
-   NEXT_PUBLIC_GEMINI_API_KEY=your_gemini_api_key_here
-   NEXT_PUBLIC_SOMNIA_CONTRACT_ADDRESS=YOUR_DEPLOYED_CONTRACT
+   NEXT_PUBLIC_OPENAI_API_KEY=your_openai_api_key_here
    NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID=your_wallet_connect_project_id_here
    ```
 
-4. **Get API Keys:**
-   - **Gemini API Key**: Get from [AI Studio Google](https://aistudio.google.com/)
+3. **Get API Keys:**
+   - **OpenAI API Key**: Get from [OpenAI Platform](https://platform.openai.com/api-keys)
    - **WalletConnect Project ID**: Get from [WalletConnect Cloud](https://cloud.walletconnect.com/) (optional)
 
-5. **Run the development server:**
+4. **Run the development server:**
    ```bash
    yarn dev
    ```
 
-6. **Open your browser:**
+5. **Open your browser:**
    Navigate to [http://localhost:3000](http://localhost:3000)
 
 ## How to Use
@@ -55,9 +51,32 @@ A beautiful dApp that generates personalized bedtime stories using AI and Web3 t
 1. **Connect Wallet**: Click the "Connect Wallet" button to connect your Web3 wallet
 2. **Enter Keywords**: Type keywords for your story (e.g., "dragon, princess, magic forest")
 3. **Generate Story**: Click "Generate Story" to create your personalized bedtime story
-4. **Minting Story**: Click "Mint Story" to mint your own unique story
-5. **Enjoy**: Read your AI-generated tale!
+4. **Enjoy**: Read your AI-generated tale!
 
+## Project Structure
+
+```
+src/
+├── app/
+│   ├── layout.tsx          # Root layout with wallet providers
+│   ├── page.tsx            # Main dApp page
+│   └── globals.css         # Global styles
+├── components/
+│   └── StoryGenerator.tsx  # Story generation component
+└── lib/
+    └── wallet.tsx          # Wallet configuration
+```
+
+## Customization
+
+- **Colors**: Modify the gradient backgrounds in `page.tsx`
+- **Story Length**: Adjust `max_tokens` in `StoryGenerator.tsx`
+- **Story Style**: Modify the system prompt in `StoryGenerator.tsx`
+- **UI Components**: Customize the Tailwind classes
+
+## Deployment
+
+The app is ready for deployment on platforms like Vercel, Netlify, or any other hosting service that supports Next.js.
 
 ## License
 
