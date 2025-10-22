@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Somnia - AI Bedtime Stories dApp
 
-## Getting Started
+A beautiful dark-themed one-page dApp that generates personalized bedtime stories using AI and Web3 technology.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- 🌙 **Dark Theme UI** - Beautiful dark theme with gradient backgrounds
+- 🔗 **Web3 Integration** - RainbowKit wallet connection
+- 🤖 **AI Story Generation** - OpenAI-powered bedtime story creation
+- ✨ **Personalized Stories** - Custom stories based on user keywords
+- 📱 **Responsive Design** - Works on desktop and mobile
+
+## Tech Stack
+
+- **Next.js 15** - React framework with App Router
+- **TypeScript** - Type safety
+- **Tailwind CSS** - Styling
+- **RainbowKit** - Wallet connection
+- **Wagmi** - Ethereum interaction
+- **OpenAI API** - AI story generation
+- **Yarn** - Package manager
+
+## Setup Instructions
+
+1. **Install dependencies:**
+   ```bash
+   yarn install
+   ```
+
+2. **Set up environment variables:**
+   Create a `.env.local` file in the root directory with:
+   ```env
+   NEXT_PUBLIC_OPENAI_API_KEY=your_openai_api_key_here
+   NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID=your_wallet_connect_project_id_here
+   ```
+
+3. **Get API Keys:**
+   - **OpenAI API Key**: Get from [OpenAI Platform](https://platform.openai.com/api-keys)
+   - **WalletConnect Project ID**: Get from [WalletConnect Cloud](https://cloud.walletconnect.com/) (optional)
+
+4. **Run the development server:**
+   ```bash
+   yarn dev
+   ```
+
+5. **Open your browser:**
+   Navigate to [http://localhost:3000](http://localhost:3000)
+
+## How to Use
+
+1. **Connect Wallet**: Click the "Connect Wallet" button to connect your Web3 wallet
+2. **Enter Keywords**: Type keywords for your story (e.g., "dragon, princess, magic forest")
+3. **Generate Story**: Click "Generate Story" to create your personalized bedtime story
+4. **Enjoy**: Read your AI-generated tale!
+
+## Project Structure
+
+```
+src/
+├── app/
+│   ├── layout.tsx          # Root layout with wallet providers
+│   ├── page.tsx            # Main dApp page
+│   └── globals.css         # Global styles
+├── components/
+│   └── StoryGenerator.tsx  # Story generation component
+└── lib/
+    └── wallet.tsx          # Wallet configuration
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Customization
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Colors**: Modify the gradient backgrounds in `page.tsx`
+- **Story Length**: Adjust `max_tokens` in `StoryGenerator.tsx`
+- **Story Style**: Modify the system prompt in `StoryGenerator.tsx`
+- **UI Components**: Customize the Tailwind classes
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Deployment
 
-## Learn More
+The app is ready for deployment on platforms like Vercel, Netlify, or any other hosting service that supports Next.js.
 
-To learn more about Next.js, take a look at the following resources:
+## License
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT License - feel free to use this project for your own dApps!
