@@ -40,7 +40,7 @@ const CONTRACT_ABI = [
   
 export default function StoryGenerator({ isConnected }: StoryGeneratorProps) {
   const [keywords, setKeywords] = useState('');
-  const [story, setStory] = useState('testing');// story rmb to put empty string
+  const [story, setStory] = useState('');// story rmb to put empty string
   const [isGenerating, setIsGenerating] = useState(false);
   const [isMinting, setIsMinting] = useState(false);
   const [error, setError] = useState('');

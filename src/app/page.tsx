@@ -15,7 +15,7 @@ export default function Home() {
           <div className="flex justify-between items-center py-6">
             <div className="flex items-center space-x-3">
               <div className="text-3xl">🌙</div>
-              <h1 className="text-2xl font-bold text-white">Somnia</h1>
+              <h1 className="text-2xl font-bold text-white">InSomnia</h1>
             </div>
             <ConnectButton />
           </div>
@@ -76,7 +76,6 @@ export default function Home() {
       <footer className="bg-gray-800/50 backdrop-blur-sm border-t border-gray-700 mt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center text-gray-400">
-            <p>Built with Next.js, Tailwind CSS, RainbowKit, and OpenAI</p>
             <p className="mt-2 text-sm">🌙 Sweet dreams await your stories</p>
           </div>
         </div>

@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Somnia - AI Bedtime Stories",
+  title: "InSomnia - AI Bedtime Stories",
   description: "Generate personalized bedtime stories with AI and Web3",
 };
 
