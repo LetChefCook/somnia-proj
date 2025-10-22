@@ -36,14 +36,16 @@ const CONTRACT_ABI = [
     }
 ] as const;
   
-  const CONTRACT_ADDRESS = '0xF1a472897a9A31f9C4e513848C365DE1Cad6e103';
+  const CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_SOMNIA_CONTRACT_ADDRESS;
   
 export default function StoryGenerator({ isConnected }: StoryGeneratorProps) {
   const [keywords, setKeywords] = useState('');
-  const [story, setStory] = useState('Testing');// story rmb to put empty string
+  const [story, setStory] = useState('');// story rmb to put empty string
   const [isGenerating, setIsGenerating] = useState(false);
-  const [isMintable, setIsMinted] = useState(false);
+  const [isMinting, setIsMinting] = useState(false);
   const [error, setError] = useState('');
+  const [mintError, setMintError] = useState('');
+  const [mintSuccess, setMintSuccess] = useState(false);
 
     // Wagmi hooks for contract interaction
     const { writeContract, data: hash, isPending, isError: isWriteError } = useWriteContract();
@@ -80,7 +82,7 @@ export default function StoryGenerator({ isConnected }: StoryGeneratorProps) {
         });
         const generatedStory = response.text || 'Failed to generate story';
         setStory(generatedStory || 'Failed to generate story');    
-        setIsMinted(true);
+        setIsMinting(true);
 
     } catch (err) {
       console.error('Error generating story:', err);
@@ -91,9 +93,40 @@ export default function StoryGenerator({ isConnected }: StoryGeneratorProps) {
   };
 
   const mintStory = async () => {
-    setIsMinted(true);
+    try {
+    setIsMinting(true);
+    setMintError('');
+    setMintSuccess(false);
+    // Split keywords into array
+      const keywordsArray = keywords
+      .split(',')
+      .map(k => k.trim())
+      .filter(k => k.length > 0);
+            // Call the smart contract
+            writeContract({
+                address: CONTRACT_ADDRESS,
+                abi: CONTRACT_ABI,
+                functionName: 'mintStory',
+                args: [keywordsArray, story],
+              });
+              
+    } catch (error) {
+        console.error('Error minting story:', error);
+        setIsMinting(false);
+    }
     console.log('Minting story...');
   };
+    // Handle transaction confirmation
+    if (isConfirmed && isMinting) {
+        setMintSuccess(true);
+        setIsMinting(false);
+      }
+    
+      // Handle transaction error
+      if (isWriteError && isMinting) {
+        setMintError('Transaction failed. Please try again.');
+        setIsMinting(false);
+      }
 
   if (!isConnected) {
     return (
@@ -155,10 +188,10 @@ export default function StoryGenerator({ isConnected }: StoryGeneratorProps) {
             </div>
             <button
           onClick={mintStory}
-          disabled={isMintable}
+          disabled={isMinting}
           className="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 disabled:from-gray-600 disabled:to-gray-600 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200 disabled:cursor-not-allowed"
         >
-          {isMintable ? (
+          {isMinting ? (
             <span className="flex items-center justify-center">
               <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
@@ -170,7 +203,16 @@ export default function StoryGenerator({ isConnected }: StoryGeneratorProps) {
             'Mint Story ⚒️'
           )}
         </button>
-        
+        {mintError && (
+          <div className="bg-red-900/50 border border-red-500 text-red-200 px-4 py-3 rounded-lg">
+            {mintError}
+          </div>
+        )}
+        {mintSuccess && (
+          <div className="bg-green-900/50 border border-green-500 text-green-200 px-4 py-3 rounded-lg">
+            ✅ Story minted successfully! Transaction hash: {hash}
+          </div>
+        )}
           </div>
         )}
       </div>
