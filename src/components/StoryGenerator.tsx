@@ -82,7 +82,7 @@ export default function StoryGenerator({ isConnected }: StoryGeneratorProps) {
         });
         const generatedStory = response.text || 'Failed to generate story';
         setStory(generatedStory || 'Failed to generate story');    
-        setIsMinting(true);
+        // setIsMinting(true);
 
     } catch (err) {
       console.error('Error generating story:', err);
